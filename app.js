@@ -1,44 +1,40 @@
 const express = require("express");
-const path = require("path");
-const logger = require("morgan");
-const ip = require("ip");
+const cors = require("cors");
 const db = require("./db/models");
 
-// importing routers
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const passport = require("passport");
-//const { localStrategy, jwtStrategy } = require("./middleware/passport");
+const movieRoutes = require("./routes/movies");
+const reviewRoutes = require("./routes/reviews");
 
-// init app
 const app = express();
-
-// middleware
-app.use(logger("dev"));
+app.use(cors());
 app.use(express.json());
-app.use(passport.initialize());
-// passport.use(localStrategy);
-// passport.use(jwtStrategy);
-app.use(express.static(path.join(__dirname, "public")));
 
-// routes
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/movies", movieRoutes);
+app.use("/reviews", reviewRoutes);
 
-// start server
-const runApp = async () => {
+//path not found middleware
+app.use((_, response, __) => {
+  response.status(404).json({ message: "Path not found" });
+});
+
+//error handling middleware
+app.use((error, request, response, next) => {
+  response.status(error.status || 500);
+  response.json({
+    message: error.message || "Internal Server Error",
+  });
+});
+
+const run = async () => {
   try {
     await db.sequelize.sync({ alter: true });
-
-    app.listen(process.env.PORT, () => {
-      console.log("Express app started succeffully");
-      console.log(`Running on ${ip.address()}:${process.env.PORT}`);
+    console.log("Connection to the database successful!");
+    await app.listen(8000, () => {
+      console.log("The application is running on localhost:8000");
     });
   } catch (error) {
-    console.log("Failed to start server:", error);
+    console.error("Error connecting to the database: ", error);
   }
 };
 
-runApp();
-
-module.exports = app;
+run();

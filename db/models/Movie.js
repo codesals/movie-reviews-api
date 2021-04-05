@@ -5,23 +5,23 @@ module.exports = (sequelize, DataTypes) => {
           },
       name: {
         type: DataTypes.STRING,
-        // allowNull: false,
+        allowNull: false,
       },
       year: {
         type: DataTypes.INTEGER,
-        // allowNull: false,
+        allowNull: false,
       },
       genre: {
         type: DataTypes.STRING,
-        // allowNull: false,
+        allowNull: false,
       },
       description: {
         type: DataTypes.STRING,
-        // allowNull: false,
+        allowNull: false,
       },
       rating: {
         type: DataTypes.INTEGER,
-        // allowNull: false,
+        allowNull: false,
       },
         
     });
