@@ -45,34 +45,34 @@ db.Sequelize = Sequelize;
 
 db.User.hasMany(db.Movie, {
   foreignKey: "userId",
-  // allowNull: false,
-  // as: "movies",
+  allowNull: false,
+  as: "movie",
 });
 
 db.User.hasMany(db.Review, {
   foreignKey: "userId",
-  // allowNull: false,
+  allowNull: false,
   // as: "reviews",
 });
 
 db.Movie.hasMany(db.Review, {
   foreignKey: "movieId",
-  // allowNull: false,
-  // as: "dishes",
+  allowNull: false,
+  // as: "reviews",
 });
 
 db.Movie.belongsTo(db.User, {
   foreignKey: "userId",
-  // as: "restaurants",
+  as: "user",
 });
 
 db.Review.belongsTo(db.Movie, {
   foreignKey: "movieId",
-  // as: "cuisine",
+  as: "movie",
 });
 db.Review.belongsTo(db.User, {
   foreignKey: "userId",
-  // as: "cuisine",
+  as: "user",
 });
 
 module.exports = db;
