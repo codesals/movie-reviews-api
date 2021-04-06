@@ -36,10 +36,11 @@ app.use((error, request, response, next) => {
 const run = async () => {
   try {
     await db.sequelize.sync({ alter: true });
-    console.log("Connection to the database successful!");
-    await app.listen(8000, () => {
-      console.log("The application is running on localhost:8000");
+    app.listen(process.env.PORT, () => {
+      console.log("Express app started seccefully");
+      console.log(`Running on ${ip.adress()}:${process.env.PORT}`)
     });
+    
   } catch (error) {
     console.error("Error connecting to the database: ", error);
   }
