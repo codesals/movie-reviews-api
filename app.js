@@ -4,6 +4,10 @@ const db = require("./db/models");
 
 const movieRoutes = require("./routes/movies");
 const reviewRoutes = require("./routes/reviews");
+const userRoutes = require("./routes/user");
+
+const passport = require("passport");
+const { localStrategy } = require("./middleware/passport");
 
 const app = express();
 app.use(cors());
@@ -11,6 +15,10 @@ app.use(express.json());
 
 app.use("/movies", movieRoutes);
 app.use("/reviews", reviewRoutes);
+app.use("/user", userRoutes);
+app.use(passport.initialize());
+app.use(passport.initialize());
+passport.use(localStrategy);
 
 //path not found middleware
 app.use((_, response, __) => {
