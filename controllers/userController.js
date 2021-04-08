@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { response } = require("express");
 
+
 // The functions add a user into the database. Firstly it encrypts the password of a user using bcrypt. Then it adds
 // the user into database with encrypted password and automatically signs in by generating token.
 
@@ -44,13 +45,14 @@ exports.signin = async (req, res) => {
   };
 
   const token = jwt.sign(JSON.stringify(payload), "asupersecretkey");
-  const tokenExists = await Token.findOne({
-    where: { token },
-  });
-  if (tokenExists) {
+
+  // const tokenExists = await Token.findOne({
+  //   where: { token },
+  // });
+  if (false) { // if (tokenExists) { if uncommenting
     res.json({ authentication: "false", message: "User already signed in" });
   } else {
-    await Token.create({ token: token });
+    // await Token.create({ token: token });
     res.json({ authentication: "true", token });
   }
 };

@@ -10,8 +10,8 @@ const {
   getUserContacts,
 } = require("../controllers/userController");
 
-//There are three routes which run the signup, signin and signut. The functions are implemented in the user controllers.
 
+//There are three routes which run the signup, signin and signut. The functions are implemented in the user controllers.
 router.post("/signup", signup);
 router.post(
   "/signin",
