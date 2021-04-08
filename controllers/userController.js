@@ -43,13 +43,13 @@ exports.signin = async (req, res) => {
   };
 
   const token = jwt.sign(JSON.stringify(payload), "asupersecretkey");
-  const tokenExists = await Token.findOne({
-    where: { token },
-  });
-  if (tokenExists) {
+  // const tokenExists = await Token.findOne({
+  //   where: { token },
+  // });
+  if (false) {
     res.json({ authentication: "false", message: "User already signed in" });
   } else {
-    await Token.create({ token: token });
+    // await Token.create({ token: token });
     res.json({ authentication: "true", token });
   }
 };
@@ -74,4 +74,3 @@ exports.signout = async (req, res) => {
     res.json({ message: "Already Signed out" });
   }
 };
-
