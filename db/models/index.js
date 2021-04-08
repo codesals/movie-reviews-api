@@ -55,6 +55,11 @@ db.User.hasMany(db.Review, {
   // as: "reviews",
 });
 
+db.User.hasMany(db.UserContact, {
+  foreignKey: "userId",
+  allowNull: false,
+});
+
 db.Movie.hasMany(db.Review, {
   foreignKey: "movieId",
   allowNull: false,

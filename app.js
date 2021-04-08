@@ -18,7 +18,6 @@ app.use("/movies", movieRoutes);
 app.use("/reviews", reviewRoutes);
 app.use("/user", userRoutes);
 app.use(passport.initialize());
-app.use(passport.initialize());
 passport.use(localStrategy);
 
 //path not found middleware

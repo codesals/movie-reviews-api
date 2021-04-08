@@ -1,6 +1,9 @@
 const LocalStrategy = require("passport-local").Strategy;
 const { User } = require("../db/models");
 const bcrypt = require("bcrypt");
+const JWTStrategy = require("passport-jwt").Strategy;
+const { fromAuthHeaderAsBearerToken } = require("passport-jwt").ExtractJwt;
+
 
 //Middleware which decrypts a password and check if it matches with the encrypted password present in the database.
 
